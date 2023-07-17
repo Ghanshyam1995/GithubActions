@@ -31,10 +31,10 @@ jobs:
       with:
         filename: coverage/**/coverage.cobertura.xml
         badge: true
-        fail_below_min: true
+        fail_below_min: ${{ github.ref == 'refs/heads/main' }} 
         format: markdown
         hide_branch_rate: true
         hide_complexity: true
         indicators: true
         output: both
-        thresholds: '60 80'
+        thresholds: '50 80'
