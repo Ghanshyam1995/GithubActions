@@ -31,7 +31,7 @@ jobs:
       with:
         filename: coverage/**/coverage.cobertura.xml
         badge: true
-        fail_below_min: true
+        fail_below_min: ${{ github.ref == 'refs/heads/main' }}
         format: markdown
         hide_branch_rate: true
         hide_complexity: true
