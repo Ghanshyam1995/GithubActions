@@ -50,5 +50,11 @@ namespace GithubAction.API.Controllers
             _service.Remove(id);
             return NoContent();
         }
+
+        [HttpGet]
+        public int Getint()
+        {
+            return 123;
+        }
     }
 }
