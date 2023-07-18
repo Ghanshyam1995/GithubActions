@@ -56,5 +56,11 @@ namespace GithubAction.API.Controllers
         {
             return Ok(true);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> PullRequest_POST()
+        {
+            return Ok(true);
+        }
     }
 }
