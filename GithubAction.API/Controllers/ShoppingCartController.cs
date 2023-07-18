@@ -50,5 +50,11 @@ namespace GithubAction.API.Controllers
             _service.Remove(id);
             return NoContent();
         }
+
+        [HttpGet]
+        public async Task<IActionResult> PullRequest_Test()
+        {
+            return Ok(true);
+        }
     }
 }
