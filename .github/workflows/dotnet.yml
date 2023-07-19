@@ -13,8 +13,6 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    permissions:
-        pull-requests: write
     steps:
     - uses: actions/checkout@v3
     - name: Setup .NET
@@ -29,6 +27,7 @@ jobs:
       run: dotnet test --collect:"XPlat Code Coverage" --results-directory ./coverage  --no-build --verbosity normal
     - name: Code Coverage Report
       uses: irongut/CodeCoverageSummary@v1.3.0
+      if: github.event_name == 'push'
       with:
         filename: coverage/**/coverage.cobertura.xml
         badge: true
@@ -41,8 +40,17 @@ jobs:
         thresholds: '60 80'
 
     - name: Add Coverage PR Comment
+      id: TestComment
+      run: |
+          EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
+          echo "test_result<<$EOF" >> "$GITHUB_ENV"
+          rake test >> "$GITHUB_ENV"
+          echo "$EOF" >> "$GITHUB_ENV"
       uses: marocchino/sticky-pull-request-comment@v2
       if: github.event_name == 'pull_request'
       with:
         recreate: true
-        path: code-coverage-results.md
+        message: |
+          Test with ${{ github.sha }}.
+          ```
+          ${{ env.test_result }}
