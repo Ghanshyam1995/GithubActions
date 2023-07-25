@@ -41,11 +41,5 @@ namespace GithubAction.API.Controllers
             }
             return totalEvenNumbers;
         }
-
-        public int[] SortedSquares(int[] nums)
-        {
-            nums = nums.Select(x =>  { return x * x; }).ToArray(); 
-
-        }
     }
 }
