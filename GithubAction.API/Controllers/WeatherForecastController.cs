@@ -29,5 +29,23 @@ namespace GithubAction.API.Controllers
             })
             .ToArray();
         }
+
+        [HttpGet]
+        public int GetEvenDigit() {
+            int[] nums = new int[5] { 2, 345, 2, 6, 7896 };
+            int totalEvenNumbers = 0;
+            for(int i =0;i< nums.Length; i++)
+            {
+                var n = nums[i].ToString();
+               if(n.Length%2==0) totalEvenNumbers++;
+            }
+            return totalEvenNumbers;
+        }
+
+        public int[] SortedSquares(int[] nums)
+        {
+            nums = nums.Select(x =>  { return x * x; }).ToArray(); 
+
+        }
     }
 }
