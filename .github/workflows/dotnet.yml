@@ -13,6 +13,10 @@ jobs:
     permissions: 
        pull-requests: write
 
+    env:
+      COVERAGE_PASS_THRESHOLD: ${{ secrets.COVERAGE_PASS_THRESHOLD || '80' }}
+      COVERAGE_HEALTHY_THRESHOLD: ${{ secrets.COVERAGE_HEALTHY_THRESHOLD || '90' }}
+        
     
     steps:
     - uses: actions/checkout@v3
@@ -38,7 +42,7 @@ jobs:
         hide_complexity: true
         indicators: true
         output: both
-        thresholds: '${{ secrets.COVERAGE_PASS_THRESHOLD || 80 }} ${{ secrets.COVERAGE_HEALTHY_THRESHOLD || 90 }}'
+        thresholds: '${{ env.COVERAGE_PASS_THRESHOLD }} ${{ env.COVERAGE_HEALTHY_THRESHOLD }}'
 
     - name: Add Coverage PR Comment
       uses: marocchino/sticky-pull-request-comment@v2
